@@ -1,11 +1,39 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import Card from "../components/Card";
+import { useParams } from "react-router-dom";
+// import { data } from 'autoprefixer';
 
 const ProductDetail = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  const [product, setProduct] = useState(null);
+  const param = useParams();
+  const productId = param.id;
 
-export default ProductDetail
+  useEffect(() => {
+    async function getProductDetail() {
+      const res = await fetch(`https://dummyjson.com/products/${productId}`);
+      const data = await res.json();
+
+      console.log(data);
+      setProduct(data);
+    }
+    getProductDetail();
+  }, []);
+
+  return (
+    <div className="py-[2rem] bg-slate-900">
+      {product && (
+        <div className="w-4/5 max-w-[40rem] mx-auto min-w-[20rem]">
+          <Card
+            title={product.title}
+            desc={product.description}
+            price={product.price}
+            image={product.thumbnail}
+            buttonText={"Add To Cart"}
+          />
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default ProductDetail;
