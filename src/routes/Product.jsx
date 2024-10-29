@@ -36,7 +36,7 @@ const Product = () => {
                 title={e.title}
                 image={e.thumbnail}
                 desc={e.description.slice(0, 50) + "..."}
-                price={Math.round(e.price * 100)}
+                price={e.price}
                 func={() => productDetailPage(e)}
                 buttonText={"Show More"}
               />

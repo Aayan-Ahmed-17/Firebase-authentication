@@ -13,7 +13,7 @@ const Card = ({ title, image, desc, price, func, buttonText }) => {
           <img src={image} alt={title} />
         </figure>
         <div className="card-body">
-          <h2 className="card-title text-2xl">Rs: {price}</h2>
+          <h2 className="card-title text-2xl">Rs: {Math.round(price * 100)}</h2>
           <h2 className="card-title">{title}</h2>
           <p className="text-lg leading-5 my-2">{desc}</p>
           <div className="card-actions justify-end">
