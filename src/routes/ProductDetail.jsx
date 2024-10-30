@@ -5,15 +5,14 @@ import { useParams } from "react-router-dom";
 
 const ProductDetail = () => {
   const [product, setProduct] = useState(null);
-  const param = useParams();
-  const productId = param.id;
+  const {id} = useParams();
 
   useEffect(() => {
     async function getProductDetail() {
-      const res = await fetch(`https://dummyjson.com/products/${productId}`);
+      const res = await fetch(`https://dummyjson.com/products/${id}`);
       const data = await res.json();
 
-      console.log(data);
+      console.log(`Showing ${id} Product`)
       setProduct(data);
     }
     getProductDetail();
