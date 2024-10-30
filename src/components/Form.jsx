@@ -18,7 +18,7 @@ const Form = ({ name, showConfirmPassword = false, onSubmitFunc }) => {
   }
 
   return (
-    <form className="w-2/6 mx-auto grid gap-3 border-2 border-black px-5 py-10 rounded-xl mt-16">
+    <form onSubmit={fieldData} className="w-2/6 mx-auto grid gap-3 border-2 border-black px-5 py-10 rounded-xl mt-16">
       <h2 className="text-center text-3xl">{name}</h2>
       <label className="input input-bordered flex items-center gap-2">
         <svg
@@ -37,6 +37,7 @@ const Form = ({ name, showConfirmPassword = false, onSubmitFunc }) => {
           name="email"
           autoComplete="on"
           ref={emailRef}
+          required
         />
       </label>
       <label className="input input-bordered flex items-center gap-2">
@@ -80,10 +81,11 @@ const Form = ({ name, showConfirmPassword = false, onSubmitFunc }) => {
             placeholder="Confirm Password"
             name="confirmPassword"
             ref={confirmPasswordRef}
+            required
           />
         </label>
       )}
-      <button type="button" className="bg-blue-500 text-white rounded-lg max-w-2/5 justify-self-end py-2 px-3 box-content text-xl" onClick={fieldData}>
+      <button type="submit" className="bg-blue-500 text-white rounded-lg max-w-2/5 justify-self-end py-2 px-3 box-content text-xl" >
         {name}
       </button>
     </form>

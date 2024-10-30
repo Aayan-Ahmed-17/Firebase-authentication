@@ -5,12 +5,19 @@ import { auth } from "../configs/firebaseConfig";
 
 const Register = () => {
   function registerUser(event) {
-    event.email &&
-      event.password &&
-      event.confirmPassword &&
-      (console.log(event.email),
-      console.log(event.password),
-      console.log(event.confirmPassword));
+    console.log(event.email);
+    console.log(event.password);
+    console.log(event.confirmPassword);
+
+    createUserWithEmailAndPassword(auth, event.email, event.password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
   }
 
   return (
