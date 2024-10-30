@@ -1,21 +1,21 @@
+import { confirmPasswordReset } from "firebase/auth";
 import React, { useState } from "react";
 import { useRef } from "react";
 
-const Form = ({ name, showConfirmPassword = false }) => {
-  // const emailRef = useRef();
-  // const passwordRef = useRef();
+const Form = ({ name, showConfirmPassword = false, onSubmitFunc }) => {
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const confirmPasswordRef = useRef();
 
-  // function registerUser(event) {
-  //   event.preventDefault();
-  //   const formData = {
-  //     email: emailRef.current.value,
-  //     password: passwordRef.current.value,
-  //   };
-  //   formData.email && formData.password && (
-  //     console.log(emailRef.current.value),
-  //     console.log(passwordRef.current.value)
-  //   )
-  // }
+  function fieldData(event) {
+    event.preventDefault();
+    const formData = {
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
+      confirmPassword: confirmPasswordRef.current.value,
+    };
+    onSubmitFunc(formData)
+  }
 
   return (
     <form className="w-2/6 mx-auto grid gap-3 border-2 border-black px-5 py-10 rounded-xl mt-16">
@@ -36,6 +36,7 @@ const Form = ({ name, showConfirmPassword = false }) => {
           placeholder="Email"
           name="email"
           autoComplete="on"
+          ref={emailRef}
         />
       </label>
       <label className="input input-bordered flex items-center gap-2">
@@ -56,6 +57,7 @@ const Form = ({ name, showConfirmPassword = false }) => {
           className="grow"
           placeholder="Password"
           name="password"
+          ref={passwordRef}
         />
       </label>
       {showConfirmPassword && (
@@ -77,10 +79,11 @@ const Form = ({ name, showConfirmPassword = false }) => {
             className="grow"
             placeholder="Confirm Password"
             name="confirmPassword"
+            ref={confirmPasswordRef}
           />
         </label>
       )}
-      <button type="button" className="bg-blue-500 text-white rounded-lg max-w-2/5 justify-self-end py-2 px-3 box-content text-xl">
+      <button type="button" className="bg-blue-500 text-white rounded-lg max-w-2/5 justify-self-end py-2 px-3 box-content text-xl" onClick={fieldData}>
         {name}
       </button>
     </form>
