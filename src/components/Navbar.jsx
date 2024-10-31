@@ -6,10 +6,10 @@ const Navbar = () => {
   return (
     <div className="flex justify-center gap-20 bg-slate-600 text-white p-5 text-2xl w-full">
       <h2 className="hover:text-gray-300 hover:underline">
-        <Link to={"/"}>Login</Link>
+        <Link to={"/"}>Register</Link>
       </h2>
       <h2 className="hover:text-gray-300 hover:underline">
-        <Link to={"register"}>Register</Link>
+        <Link to={"login"}>Login</Link>
       </h2>
       <h2 className="hover:text-gray-300 hover:underline">
         <Link to={"product"}>Product</Link>
