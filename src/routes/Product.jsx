@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Card from "../components/Card";
 import { useNavigate } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../configs/firebaseConfig";
+import Navbar from "../components/Navbar";
 
 const Product = () => {
   const [product, setProduct] = useState(null);
@@ -26,6 +29,8 @@ const Product = () => {
   }, []);
 
   return (
+    <>
+    <Navbar showSignoutButton={true}/>
     <div className="px-6 py-4 bg-gray-400">
       {product && (
         <div className="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-12 sm:gap-6 md:gap-10  mx-auto gap-2">
@@ -39,13 +44,28 @@ const Product = () => {
                 price={e.price}
                 func={() => productDetailPage(e)}
                 buttonText={"Show More"}
-              />
+                />
             );
           })}
         </div>
       )}
     </div>
+      </>
   );
 };
+
+export function SignoutFuncBtn(){
+  const logoutUser = () => {
+    signOut(auth).then(() => {
+      navigate('/login')
+    }).catch((error) => {
+      // An error happened.
+    });
+  }
+
+  return(
+    <button onClick={logoutUser}>Signout</button>
+  )
+}
 
 export default Product;
