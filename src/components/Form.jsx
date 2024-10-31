@@ -7,18 +7,28 @@ const Form = ({ name, showConfirmPassword = false, onSubmitFunc }) => {
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
 
+  let formData;
+
   function fieldData(event) {
     event.preventDefault();
-    const formData = {
-      email: emailRef.current.value,
-      password: passwordRef.current.value,
-      confirmPassword: confirmPasswordRef.current.value,
-    };
-    onSubmitFunc(formData)
+    showConfirmPassword
+      ? (formData = {
+          email: emailRef.current.value,
+          password: passwordRef.current.value,
+          confirmPassword: confirmPasswordRef.current.value,
+        })
+      : (formData = {
+          email: emailRef.current.value,
+          password: passwordRef.current.value, 
+        });
+    onSubmitFunc(formData);
   }
 
   return (
-    <form onSubmit={fieldData} className="w-2/6 mx-auto grid gap-3 border-2 border-black px-5 py-10 rounded-xl mt-16">
+    <form
+      onSubmit={fieldData}
+      className="w-2/6 mx-auto grid gap-3 border-2 border-black px-5 py-10 rounded-xl mt-16"
+    >
       <h2 className="text-center text-3xl">{name}</h2>
       <label className="input input-bordered flex items-center gap-2">
         <svg
@@ -85,7 +95,10 @@ const Form = ({ name, showConfirmPassword = false, onSubmitFunc }) => {
           />
         </label>
       )}
-      <button type="submit" className="bg-blue-500 text-white rounded-lg max-w-2/5 justify-self-end py-2 px-3 box-content text-xl" >
+      <button
+        type="submit"
+        className="bg-blue-500 text-white rounded-lg max-w-2/5 justify-self-end py-2 px-3 box-content text-xl"
+      >
         {name}
       </button>
     </form>
