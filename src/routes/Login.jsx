@@ -1,6 +1,5 @@
 import React from "react";
 import Form from "../components/Form";
-import Navbar from "../components/Navbar";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../configs/firebaseConfig";
 
@@ -24,7 +23,6 @@ const Login = () => {
 
   return (
     <>
-      <Navbar />
       <Form name={"Login User"} onSubmitFunc={LoginUser} />
     </>
   );
